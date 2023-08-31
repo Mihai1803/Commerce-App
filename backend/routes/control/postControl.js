@@ -18,7 +18,7 @@ const getPosts = asyncHandler( async(req, res) => {
 //@route    /api/post/create
 //@access   private
 const createPost = asyncHandler( async (req, res) => {
-  const { title, description, imageUrl } = req.body
+  const { title, description } = req.body
 
   // validation
   if (!title || !description) {
@@ -36,7 +36,7 @@ const createPost = asyncHandler( async (req, res) => {
     user: req.user._id,
     title,
     description,
-    imageUrl: imageUrl ? imageUrl.toString() : ' '
+    imageUrl: req.file ? req.file.path : ' '
   })
 
   if (post) {
@@ -55,7 +55,7 @@ const createPost = asyncHandler( async (req, res) => {
 
 
 //@desc     GET get user posts
-//@route    /api/post/user-posts
+//@route    /api/post/user/userId
 //@access   private
 const getUserPosts = asyncHandler( async (req, res) => {
 
@@ -64,6 +64,11 @@ const getUserPosts = asyncHandler( async (req, res) => {
   if (!user) {
     return res.status(400).json({ message: 'User not found' })
   }
+
+  if (user._id != req.params.userId) {
+    return res.status(400).json({ message: 'Not authorized' })
+  }
+
 
   // get posts
   const posts = await Post.find({ user: req.user._id })
@@ -83,7 +88,7 @@ const getPostById = asyncHandler( async (req, res) => {
   const post = await Post.findOne({ _id: req.params.postId })
 
   if (!post) {
-    return res.status(400).json({ message: 'Post not found' })
+    res.status(400).json({ message: 'Post not found' })
   } else {
     res.status(200).json({
       title: post.title,
@@ -96,18 +101,31 @@ const getPostById = asyncHandler( async (req, res) => {
 //@route    /api/post/delete/:postId
 //@access   private
 const deletePost = asyncHandler( async (req, res) => {
+
   try {
-    await Post.deleteOne({ _id: req.params.postId })
-    res.status(200).json({ message: 'Post deleted' })
+    const post = await Post.findOne({ _id: req.params.postId })
+    if (post.user.equals(req.user._id)) {
+      await Post.deleteOne({_id: req.params.postId })
+      res.status(200).json({ message: 'Post deleted'})
+    } else {
+      res.status(400).json({ message: 'Not Authorized' });
+    }
   } catch (error) {
     res.status(400).json({ message: 'Could not delete post'})
   }
 })
+
+const test = asyncHandler( async (req, res) => {
+  res.send(ok)
+
+})
+
 
 module.exports = {
   getPosts,
   createPost,
   getUserPosts,
   getPostById,
-  deletePost
+  deletePost,
+  test
 }

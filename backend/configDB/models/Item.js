@@ -13,7 +13,11 @@ const itemModel = new mongoose.Schema({
   category: {
     type: String,
     required: [true, 'Please add a category'],
-    enum: ['Phones', 'Watches', 'Computers', 'Laptops']
+    enum: ['Phone', 'Watch', 'Computer', 'Laptop']
+  },
+  price: {
+    type: Number,
+    required: [true, 'Please add a price']
   },
   spec1: {
     type: String,
@@ -26,6 +30,9 @@ const itemModel = new mongoose.Schema({
   spec3: {
     type: String,
     required: true
+  },
+  description: {
+    type: String
   },
   imageUrl: {
     type: String
