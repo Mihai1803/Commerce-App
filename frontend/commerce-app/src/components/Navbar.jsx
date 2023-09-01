@@ -1,10 +1,15 @@
 import React from 'react'
 import { Link } from  'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faMagnifyingGlass, faUser} from '@fortawesome/free-solid-svg-icons'
+import { logout } from '../feautures/auth/authSlice'
 
 function Navbar() {
 
+  const dispatch = useDispatch()
+  const { user } = useSelector(state => state.auth)
+  
 
   const scrollToArticle = () => {
     const targetSection = document.getElementById('article')
@@ -17,6 +22,9 @@ function Navbar() {
     if (targetSection) {
       targetSection.scrollIntoView({ behavior: 'smooth' })
     }
+  }
+  const onClick = () => {
+    dispatch(logout())
   }
 
 
@@ -43,8 +51,18 @@ function Navbar() {
                              md:py-0'
               >
                 <li><Link to='/' className='text-lg hover:text-white'>Home</Link></li>
-                <li><Link to='/register' className='text-lg hover:text-white'>Register</Link></li>
-                <li><Link to='/login' className='text-lg hover:text-white'>Login</Link></li>
+                {
+                  user ?
+                  (
+                    <li><button to='/' className='text-lg hover:text-white' onClick={onClick}>Logout</button></li>
+                  ) :
+                  (
+                    <>
+                      <li><Link to='/register' className='text-lg hover:text-white'>Register</Link></li>
+                      <li><Link to='/login' className='text-lg hover:text-white'>Login</Link></li>
+                    </>
+                  )
+                }
                 <li><Link to='/' className='text-lg hover:text-white' onClick={scrollToArticle}>Articles</Link></li>
                 <li><Link to='/' className='text-lg hover:text-white' onClick={scrollToFooter}>Contact</Link></li>
                 

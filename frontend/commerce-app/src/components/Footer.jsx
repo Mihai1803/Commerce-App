@@ -1,9 +1,14 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faTwitter, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { Link } from 'react-router-dom'
+import { logout } from '../feautures/auth/authSlice'
 
 function Footer() {
+
+  const dispatch = useDispatch()
+  const { user } = useSelector(state => state.auth)
 
   const scrollToArticle = () => {
     const targetSection = document.getElementById('article')
@@ -16,6 +21,9 @@ function Footer() {
     if (targetSection) {
       targetSection.scrollIntoView({ behavior: 'smooth' })
     }
+  }
+  const onClick = () => {
+    dispatch(logout())
   }
 
   return (
@@ -69,12 +77,24 @@ function Footer() {
               <li className='hover:text-red-400 cursor-pointer'>
                 <Link to='/'>Home</Link>
               </li>
-              <li className='hover:text-red-400 cursor-pointer'>
-                <Link to='/register'>Register</Link>
-              </li>
-              <li className='hover:text-red-400 cursor-pointer'>
-                <Link to='/login'>Login</Link>
-              </li>
+              {
+                user ?
+                (
+                  <li className='hover:text-red-400 cursor-pointer'>
+                      <button onClick={onClick}>Logout</button>
+                  </li>
+                ) :
+                (
+                  <>
+                    <li className='hover:text-red-400 cursor-pointer'>
+                      <Link to='/register'>Register</Link>
+                    </li>
+                    <li className='hover:text-red-400 cursor-pointer'>
+                      <Link to='/login'>Login</Link>
+                    </li>
+                  </>
+                )
+              }
             </ul>
             <br/>
           </div>

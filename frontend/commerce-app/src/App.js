@@ -8,6 +8,7 @@ import BlogPage from './pages/BlogPage';
 import Shop from './pages/Shop';
 import CreatePost from './pages/CreatePost';
 import ListItem from './pages/ListItem';
+import PrivateRoute from './components/PrivateRoute';
 import './App.css'
 
 function App() {
@@ -18,12 +19,18 @@ function App() {
         <Route path='/' element={<Landing />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/user-panel' element={<UserPanel />} />
+        <Route path='/user-panel' element={<PrivateRoute />}>
+          <Route path='/user-panel' element={<UserPanel />} />
+        </Route>
         <Route path='/product' element={<ProductPage />} />
         <Route path='/post' element={<BlogPage />} />
         <Route path='/shop' element={<Shop />} />
-        <Route path='/create-post' element={<CreatePost />} />
-        <Route path='/list-item' element={<ListItem />} />
+        <Route path='/create-post' element={<PrivateRoute />}>
+          <Route path='/create-post' element={<CreatePost />} />
+        </Route>
+        <Route path='/list-item' element={<PrivateRoute />}>
+          <Route path='/list-item' element={<ListItem />} />
+        </Route>
       </Routes>
     </Router>
    </>

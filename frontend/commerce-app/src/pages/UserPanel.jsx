@@ -1,9 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Navbar from '../components/Navbar'
 import avatar from '../img/avatar.avif'
 
 function UserPanel() {
+
+  const { user } = useSelector(state => state.auth)
+
   return (
     <section className='bg-gradient-to-t from-white to-cyan-300 h-screen'>
       <div className='max-w-screen-2xl mx-auto'>
@@ -18,10 +22,10 @@ function UserPanel() {
             <div className='flex flex-wrap flex-col space-y-4 pt-32 pb-12 px-12
                             md:content-center md:py-12 md:ml-24'
             >
-              <p className='text-lg'><span className='font-bold text-xl'>Name:</span> Jhon Doe</p>
-              <p className='text-lg'><span className='font-bold text-xl'>Email:</span> jhon@gmail.com</p>
-              <p className='text-lg'><span className='font-bold text-xl'>Number of products for sale:</span> 12</p>
-              <p className='text-lg'><span className='font-bold text-xl'>Interests:</span> Technology, Gaming, Movies</p>
+              <p className='text-lg'><span className='font-bold text-xl'>Name: </span>{user.user}</p>
+              <p className='text-lg'><span className='font-bold text-xl'>Email: </span>{user.email}</p>
+              <p className='text-lg'><span className='font-bold text-xl'>Number of products for sale: </span>{user.productsForSale}</p>
+              <p className='text-lg'><span className='font-bold text-xl'>Interests:</span> {user.interests !== ' ' ? user.interests : 'No interests'}</p>
             </div>
           </div>
           <div className='flex flex-col space-y-8 mb-8'>

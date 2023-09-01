@@ -15,7 +15,8 @@ const userModel = new mongoose.Schema({
   },
   interests: {
     type: String,
-    enum: ['Gaming', 'Movies', 'Technology', 'Television']
+    enum: ['Gaming', 'Movies', 'Technology', 'Television', ' '],
+    default: ' '
   },
   productsForSale: {
     type: Number,
