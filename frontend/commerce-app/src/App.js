@@ -23,7 +23,7 @@ function App() {
           <Route path='/user-panel' element={<UserPanel />} />
         </Route>
         <Route path='/product' element={<ProductPage />} />
-        <Route path='/post' element={<BlogPage />} />
+        <Route path='/post/:postId' element={<BlogPage />} />
         <Route path='/shop' element={<Shop />} />
         <Route path='/create-post' element={<PrivateRoute />}>
           <Route path='/create-post' element={<CreatePost />} />

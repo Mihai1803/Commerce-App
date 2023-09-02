@@ -7,7 +7,8 @@ const Post = require('../../configDB/models/Post')
 //@access   public
 const getPosts = asyncHandler( async(req, res) => {
   try {
-    const posts = await Post.find()
+    const limit = parseInt(req.query.limit)
+    const posts = await Post.find().limit(limit)
     res.status(200).json(posts)
   } catch (error) {
     res.status(500).json({ message: 'Server Error' })
@@ -86,13 +87,16 @@ const getUserPosts = asyncHandler( async (req, res) => {
 const getPostById = asyncHandler( async (req, res) => {
 
   const post = await Post.findOne({ _id: req.params.postId })
+  const user = await User.findOne({ _id: post.user })
 
   if (!post) {
     res.status(400).json({ message: 'Post not found' })
   } else {
     res.status(200).json({
+      author: user.name,
       title: post.title,
-      description: post.description
+      description: post.description,
+      created: post.createdAt
     })
   }
 })

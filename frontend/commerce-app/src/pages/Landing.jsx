@@ -6,7 +6,9 @@ import BlogDisplay from '../components/BlogDisplay'
 import ProductDisplay from '../components/ProductDisplay'
 import Footer from '../components/Footer'
 
+
 function Landing() {
+
   return (
     <>
       <section className='bg-gradient-to-t from-white to-cyan-500'>
