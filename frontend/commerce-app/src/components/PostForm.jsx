@@ -32,6 +32,7 @@ function PostForm() {
         ...prevState,
         image: e.target.files[0]
       }))
+      console.log(e.target.files[0]);
     } else {
       setFormData(prevState => ({
         ...prevState,

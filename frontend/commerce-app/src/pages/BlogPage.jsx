@@ -4,10 +4,12 @@ import blogDisplay1 from '../img/blogDisplay1.jpg'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getPostById, reset } from '../feautures/post/postSlice'
 
 function BlogPage() {
+  
+  const [imagePath, setImagePath] = useState('')
 
   const dispatch = useDispatch()
   const { postId } = useParams()
@@ -23,9 +25,9 @@ function BlogPage() {
     dispatch(getPostById(postId)).then(() => {
       dispatch(reset())
     })
+    setImagePath(singlePost.imageUrl)
   }, [])
 
-  
 
   return (
     <div className='bg-gradient-to-t from-white to-cyan-500 h-screen'>

@@ -7,7 +7,7 @@ const Post = require('../../configDB/models/Post')
 //@access   public
 const getPosts = asyncHandler( async(req, res) => {
   try {
-    const limit = parseInt(req.query.limit)
+    const limit = parseInt(req.query.limit) || 4
     const posts = await Post.find().limit(limit)
     res.status(200).json(posts)
   } catch (error) {
@@ -96,6 +96,7 @@ const getPostById = asyncHandler( async (req, res) => {
       author: user.name,
       title: post.title,
       description: post.description,
+      imageUrl: post.imageUrl,
       created: post.createdAt
     })
   }

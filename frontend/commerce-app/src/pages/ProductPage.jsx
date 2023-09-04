@@ -2,7 +2,32 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import headphones from '../img/headphones.jpg'
 
-function ProductPage() {
+import { useEffect } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getPhoneById, reset } from '../feautures/item/phone/phoneSlice'
+
+
+function ProductPage( ) {
+
+  const dispatch = useDispatch()
+  const { singlePhone } = useSelector(state => state.phone)
+
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search)
+
+  const encodedCategory = searchParams.get('product')
+  const decodedCategory = decodeURIComponent(encodedCategory)
+  const { productId } = useParams()
+
+  useEffect(() => {
+    if (decodedCategory === 'Phone') {
+      dispatch(getPhoneById(productId)).then(() => {
+        dispatch(reset())
+      })
+    }
+  }, [])
+
   return (
     <div className='bg-gradient-to-t from-white to-cyan-500'>
       <Navbar/>
@@ -14,18 +39,18 @@ function ProductPage() {
                                                   lg:mx-0' 
           />
           <h1 className='text-3xl text-center font-semibold
-                        lg:text-left'
+                        lg:text-center'
           >
-            Headphones Beats 500 2023
+            {singlePhone.productName}
           </h1>
         </div>
         <div className='lg:max-w-lg lg:flex lg:flex-col lg:justify-center'> 
           <div className='p-10'>
             <h1 className='font-bold'>Description</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo aperiam nesciunt error at, ratione cupiditate soluta, ad sit suscipit vel, odit quas. Dolorem, quas repudiandae possimus cumque est dolorum accusantium eveniet in, quae laborum voluptate iste dignissimos nobis quam ducimus?</p>
+            <p>{singlePhone.description}</p>
           </div>
           <div className='flex justify-between px-10 pb-10'>
-            <p className='text-lg'><span className='font-bold'>Price:</span> $100</p>
+            <p className='text-lg'><span className='font-bold'>Price:</span> {`$${singlePhone.price}`}</p>
             <button className='px-4 py-1 border-solid rounded-xl font-bold bg-yellow-500
                               hover:bg-red-300 hover:scale-110'
             >
