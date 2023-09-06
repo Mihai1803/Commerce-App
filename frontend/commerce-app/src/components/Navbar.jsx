@@ -65,6 +65,7 @@ function Navbar() {
                 }
                 <li><Link to='/' className='text-lg hover:text-white' onClick={scrollToArticle}>Articles</Link></li>
                 <li><Link to='/' className='text-lg hover:text-white' onClick={scrollToFooter}>Contact</Link></li>
+                <li><Link to='/shop' className='text-lg hover:text-white'>Shop</Link></li>
                 
               </ul>
             </nav>

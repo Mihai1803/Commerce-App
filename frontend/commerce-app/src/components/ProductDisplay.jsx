@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import headphones from '../img/headphones.jpg'
+// import computer from '../img/computer.jpeg'
+// import laptop from '../img/laptop.jpg'
+// import iphone from '../img/iphone.jpg'
+// import watch from '../img/watch.jpg'
 
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -33,6 +37,7 @@ function ProductDisplay() {
     dispatch(getWatches()).then(() => {
       dispatch(resetWatch())
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
  
   const phoneState = () => {
