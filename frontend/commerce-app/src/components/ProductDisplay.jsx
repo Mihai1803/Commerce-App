@@ -1,9 +1,4 @@
 import React, { useState } from 'react'
-import headphones from '../img/headphones.jpg'
-// import computer from '../img/computer.jpeg'
-// import laptop from '../img/laptop.jpg'
-// import iphone from '../img/iphone.jpg'
-// import watch from '../img/watch.jpg'
 
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -72,7 +67,16 @@ function ProductDisplay() {
           >
           <div className='w-fit shadow-2xl bg-white hover:scale-110'>
             <div className='flex flex-wrap flex-col space-y-2 justify-center content-center py-10'>
-              <img src={headphones} alt=""  className='w-64 h-64'/>
+              <img 
+                src= {
+                  productState === 'Phone' ? phones[0].imageUrl :
+                  productState === 'Computer' ? computers[0].imageUrl :
+                  productState === 'Laptop' ? laptops[0].imageUrl :
+                  watches[0].imageUrl
+                }
+                alt=""  
+                className='w-64 h-64'
+              />
               <h1 className='text-xl font-bold text-center'>
                 { 
                   productState === 'Phone' ? phones[0].productName :
@@ -94,7 +98,16 @@ function ProductDisplay() {
           
           <div className='w-fit shadow-2xl bg-white hover:scale-110'>
             <div className='flex flex-wrap flex-col space-y-2 justify-center content-center py-10'>
-              <img src={headphones} alt=""  className='w-64 h-64'/>
+              <img 
+                src= {
+                  productState === 'Phone' ? phones[1].imageUrl :
+                  productState === 'Computer' ? computers[1].imageUrl :
+                  productState === 'Laptop' ? laptops[1].imageUrl :
+                  watches[1].imageUrl
+                }
+                alt=""  
+                className='w-64 h-64'
+              />
               <h1 className='text-xl font-bold text-center'>
                 { 
                   productState === 'Phone' ? phones[1].productName :
@@ -116,7 +129,16 @@ function ProductDisplay() {
           
           <div className='w-fit shadow-2xl bg-white hover:scale-110'>
             <div className='flex flex-wrap flex-col space-y-2 justify-center content-center py-10'>
-              <img src={headphones} alt=""  className='w-64 h-64'/>
+              <img 
+                src= {
+                  productState === 'Phone' ? phones[2].imageUrl :
+                  productState === 'Computer' ? computers[2].imageUrl :
+                  productState === 'Laptop' ? laptops[2].imageUrl :
+                  watches[2].imageUrl
+                }
+                alt=""  
+                className='w-64 h-64'
+              />
               <h1 className='text-xl font-bold text-center'>
                 { 
                   productState === 'Phone' ? phones[2].productName :
@@ -138,7 +160,16 @@ function ProductDisplay() {
           
           <div className='w-fit shadow-2xl bg-white hover:scale-110'>
             <div className='flex flex-wrap flex-col space-y-2 justify-center content-center py-10'>
-              <img src={headphones} alt=""  className='w-64 h-64'/>
+              <img 
+                src= {
+                  productState === 'Phone' ? phones[3].imageUrl :
+                  productState === 'Computer' ? computers[3].imageUrl :
+                  productState === 'Laptop' ? laptops[3].imageUrl :
+                  watches[3].imageUrl
+                }
+                alt=""  
+                className='w-64 h-64'
+              />
               <h1 className='text-xl font-bold text-center'>
                 { 
                   productState === 'Phone' ? phones[3].productName :

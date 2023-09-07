@@ -6,6 +6,8 @@ import BlogDisplay from '../components/BlogDisplay'
 import ProductDisplay from '../components/ProductDisplay'
 import Footer from '../components/Footer'
 
+import { Link } from 'react-router-dom'
+
 
 function Landing() {
 
@@ -23,7 +25,7 @@ function Landing() {
             <button className='w-1/2 mx-auto py-2 border-solid rounded-2xl font-bold bg-yellow-500 
                              hover:bg-red-300 hover:scale-110'
             > 
-              See More
+              <Link to='/shop'>See More</Link>
             </button>
           </div>
         </div>

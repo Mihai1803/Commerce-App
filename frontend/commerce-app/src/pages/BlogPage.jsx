@@ -1,15 +1,14 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import blogDisplay1 from '../img/blogDisplay1.jpg'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { getPostById, reset } from '../feautures/post/postSlice'
 
 function BlogPage() {
   
-  const [imagePath, setImagePath] = useState('')
+  
 
   const dispatch = useDispatch()
   const { postId } = useParams()
@@ -25,7 +24,6 @@ function BlogPage() {
     dispatch(getPostById(postId)).then(() => {
       dispatch(reset())
     })
-    setImagePath(singlePost.imageUrl)
   }, [])
 
 
@@ -37,7 +35,7 @@ function BlogPage() {
       >
         <div>
           <h1 className='text-3xl text-center font-bold py-10'>{singlePost.title}</h1>
-          <img src={blogDisplay1} alt="" className='w-96 h-96 mx-auto mt-4 mb-4 rounded-2xl shadow-2xl' />
+          <img src={singlePost.imageUrl} alt="" className='w-96 h-96 mx-auto mt-4 mb-4 rounded-2xl shadow-2xl' />
         </div>
         <div className='px-10 py-24
                         lg:max-w-2xl lg:mt-12'

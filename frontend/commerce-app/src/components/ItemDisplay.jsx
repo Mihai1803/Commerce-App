@@ -1,5 +1,4 @@
 import React from 'react'
-import phoneImg from '../img/iphone.jpg'
 import { Link } from 'react-router-dom';
 
 function ItemDisplay({ item }) {
@@ -7,9 +6,9 @@ function ItemDisplay({ item }) {
   const encodedCategory = encodeURIComponent(item.category)
   
   return (
-    <div className='flex flex-col rounded-2xl shadow-2xl bg-white py-10 px-10'>
+    <div className='flex flex-col rounded-2xl shadow-2xl bg-white py-10 px-6'>
       <h1 className='pb-2 text-center font-bold'>{item.productName}</h1>
-      <img src={phoneImg} alt=""  className='w-1/8 h-60 mb-4'/>
+      <img src={item.imageUrl} alt=""  className='w-1/8 h-60 m'/>
       <ul className='flex flex-wrap flex-col content-center text-center'>
         <li>{item.spec1}</li>
         <li>{item.spec2}</li>

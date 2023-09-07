@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import headphones from '../img/headphones.jpg'
 
 import { useEffect } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
@@ -35,7 +34,7 @@ function ProductPage( ) {
                       lg:flex-row lg:space-x-52 lg:justify-center lg:mt-20'
       >
         <div className='flex flex-col space-y-8'>
-          <img src={headphones} alt="" className='w-96 h-96 mx-auto mt-20 rounded-xl shadow-2xl
+          <img src={singlePhone.imageUrl} alt="" className='w-96 h-96 mx-auto mt-20 rounded-xl shadow-2xl
                                                   lg:mx-0' 
           />
           <h1 className='text-3xl text-center font-semibold
