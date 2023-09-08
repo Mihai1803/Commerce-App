@@ -18,7 +18,18 @@ const getWatches = async () => {
   return res.data
 }
 
+const getWatchById = async (watchId) => {
+  const res = await axios.get(API_URL + `watch/${watchId}`)
+
+  if (res.data) {
+    localStorage.setItem('singleWatch', JSON.stringify(res.data))
+  }
+
+  return res.data
+}
+
 const watchService = {
-  getWatches
+  getWatches,
+  getWatchById
 }
 export default watchService

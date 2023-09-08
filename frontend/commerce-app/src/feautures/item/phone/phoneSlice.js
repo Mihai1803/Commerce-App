@@ -27,7 +27,7 @@ export const getPhones = createAsyncThunk('get/phone', async(thunkAPI) => {
   }
 })
 
-export const getPhoneById = createAsyncThunk('post/single/get', async(phoneId, thunkAPI) => {
+export const getPhoneById = createAsyncThunk('get/single/phone', async(phoneId, thunkAPI) => {
   try {
     return await phoneService.getPhoneById(phoneId)
   } catch (error) {

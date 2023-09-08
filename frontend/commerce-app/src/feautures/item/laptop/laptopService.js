@@ -18,7 +18,17 @@ const getLaptops = async () => {
   return res.data
 }
 
+const getLaptopById = async (laptopId) => {
+  const res = await axios.get(API_URL + `laptop/${laptopId}`)
+
+  if (res.data) {
+    localStorage.setItem('singleLaptop', JSON.stringify(res.data))
+  }
+  return res.data
+}
+
 const laptopService = {
-  getLaptops
+  getLaptops,
+  getLaptopById
 }
 export default laptopService

@@ -217,6 +217,69 @@ const getPhoneById = asyncHandler ( async(req, res) => {
   }
 })
 
+//@desc     GET get computer by id
+//@route    /api/item/computer/computerId
+//@access   public
+const getComputerById = asyncHandler( async(req, res) => {
+  const computer = await Computer.findOne({ _id: req.params.computerId })
+  if (!computer) {
+    res.status(400).json({ message: 'Item not found' })
+  } else {
+    res.status(200).json({
+      productName: computer.productName,
+      category: computer.category,
+      price: computer.price,
+      spec1: computer.spec1,
+      spec2: computer.spec2,
+      spec3: computer.spec3,
+      description: computer.description,
+      imageUrl: computer.imageUrl
+    })
+  }
+})
+
+//@desc     GET get laptop by id
+//@route    /api/item/laptop/laptopId
+//@access   public
+const getLaptopById = asyncHandler( async(req, res) => {
+  const laptop = await Laptop.findOne({ _id: req.params.laptopId })
+  if (!laptop) {
+    res.status(400).json({ message: 'Item not found' })
+  } else {
+    res.status(200).json({
+      productName: laptop.productName,
+      category: laptop.category,
+      price: laptop.price,
+      spec1: laptop.spec1,
+      spec2: laptop.spec2,
+      spec3: laptop.spec3,
+      description: laptop.description,
+      imageUrl: laptop.imageUrl
+    })
+  }
+})
+
+//@desc     GET get watch by id
+//@route    /api/item/watch/watchId
+//@access   public
+const getWatchById = asyncHandler( async(req, res) => {
+  const watch = await Watch.findOne({ _id: req.params.watchId })
+  if (!watch) {
+    res.status(400).json({ message: 'Item not found' })
+  } else {
+    res.status(200).json({
+      productName: watch.productName,
+      category: watch.category,
+      price: watch.price,
+      spec1: watch.spec1,
+      spec2: watch.spec2,
+      spec3: watch.spec3,
+      description: watch.description,
+      imageUrl: watch.imageUrl
+    })
+  }
+})
+
 
 
 module.exports = {
@@ -228,5 +291,8 @@ module.exports = {
   getLaptops,
   getComputers,
   getWatches,
-  getPhoneById
+  getPhoneById,
+  getComputerById,
+  getLaptopById,
+  getWatchById
 }

@@ -18,7 +18,17 @@ const getComputers = async () => {
   return res.data
 }
 
+const getComputerById = async(computerId) => {
+  const res = await axios.get(API_URL + `computer/${computerId}`)
+  
+  if (res.data) {
+    localStorage.setItem('singleComputer', JSON.stringify(res.data))
+  }
+  return res.data
+}
+
 const computerService = {
-  getComputers
+  getComputers,
+  getComputerById
 }
 export default computerService
