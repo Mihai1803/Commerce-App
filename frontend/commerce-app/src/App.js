@@ -8,7 +8,9 @@ import BlogPage from './pages/BlogPage';
 import Shop from './pages/Shop';
 import CreatePost from './pages/CreatePost';
 import ListItem from './pages/ListItem';
+import UserItems from './components/UserItems';
 import PrivateRoute from './components/PrivateRoute';
+
 import './App.css'
 
 function App() {
@@ -30,6 +32,9 @@ function App() {
         </Route>
         <Route path='/list-item' element={<PrivateRoute />}>
           <Route path='/list-item' element={<ListItem />} />
+        </Route>
+        <Route path='/user-items' element={<PrivateRoute />}>
+          <Route path='/user-items' element={<UserItems />} />
         </Route>
       </Routes>
     </Router>

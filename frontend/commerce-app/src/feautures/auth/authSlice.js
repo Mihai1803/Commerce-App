@@ -3,9 +3,11 @@ import authService from "./authService"
 
 // get user from localstorage
 const user = JSON.parse(localStorage.getItem('user'))
+const userItems = JSON.parse(localStorage.getItem('userItems'))
 
 const initialState = {
   user: user ? user : null,
+  userItems: userItems ? userItems : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -32,6 +34,36 @@ export const register = createAsyncThunk('auth/register', async(user, thunkAPI) 
 export const login = createAsyncThunk('auth/login', async(user, thunkAPI) => {
   try {
     return await authService.login(user)
+  } catch (error) {
+    const message =
+    (error.response && error.response.data && error.response.data.message)
+    ||
+    error.message
+    ||
+    error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+// get user items
+export const getUserItems = createAsyncThunk('user/getUserItems', async(userId, thunkAPI) => {
+  try {
+    return await authService.getUserItems(userId)
+  } catch (error) {
+    const message =
+    (error.response && error.response.data && error.response.data.message)
+    ||
+    error.message
+    ||
+    error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+// delete item
+export const deleteItem = createAsyncThunk('user/deleteItem', async(itemId, thunkAPI) => {
+  try {
+    return await authService.deleteItem(itemId)
   } catch (error) {
     const message =
     (error.response && error.response.data && error.response.data.message)
@@ -105,6 +137,38 @@ export const authSlice = createSlice({
         state.isSuccess = true
         state.message = 'Logged Out'
         state.user = null
+      })
+      .addCase(getUserItems.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getUserItems.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        state.message = 'Items fatched'
+        state.userItems = action.payload
+      })
+      .addCase(getUserItems.rejected, (state,action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.payload
+        state.userItems = null
+      })
+      .addCase(deleteItem.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteItem.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.isSuccess = true
+        state.message = action.payload
+      })
+      .addCase(deleteItem.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.payload
       })
   }
 

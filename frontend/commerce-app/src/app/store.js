@@ -5,6 +5,7 @@ import phoneReducer from '../feautures/item/phone/phoneSlice'
 import computerReducer from '../feautures/item/computer/computerSlice'
 import laptopReducer from '../feautures/item/laptop/laptopSlice'
 import watchReducer from '../feautures/item/watch/watchSlice'
+import createReducer from '../feautures/item/create/createSlice'
 
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
     phone: phoneReducer,
     computer: computerReducer,
     laptop: laptopReducer,
-    watch: watchReducer
+    watch: watchReducer,
+    create: createReducer
   }
 })

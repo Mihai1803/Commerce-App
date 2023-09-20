@@ -28,21 +28,31 @@ function UserPanel() {
               <p className='text-lg'><span className='font-bold text-xl'>Interests:</span> {user.interests !== ' ' ? user.interests : 'No interests'}</p>
             </div>
           </div>
-          <div className='flex flex-col space-y-8 mb-8'>
-              <div>
-                <Link to='/list-item' className='ml-12 px-4 py-2 border-solid rounded-2xl font-bold bg-yellow-400
+          <div className='flex flex-col space-y-8 mb-8
+                          2xl:flex-row 2xl:space-y-0 2xl:pr-6'                
+          >
+              <div className='mx-auto'>
+                <Link to='/list-item' className='px-4 py-2 border-solid rounded-2xl font-bold bg-yellow-400
                                         lg:ml-6
                                         hover:bg-red-300 hover:scale-110'
                 >
                   List Item Online
                 </Link>
               </div>
-              <div>
-                <Link to='/create-post' className='ml-12 px-4 py-2 border-solid rounded-2xl font-bold bg-yellow-400
+              <div className='mx-auto'>
+                <Link to='/create-post' className='px-4 py-2 border-solid rounded-2xl font-bold bg-yellow-400
                                         lg:ml-6
                                         hover:bg-red-300 hover:scale-110'
                 >
                   Create Blog Post
+                </Link>
+              </div>
+              <div className='mx-auto'>
+                <Link to='/user-items' className='px-4 py-2 border-solid rounded-2xl font-bold bg-yellow-400
+                                        lg:ml-6
+                                        hover:bg-red-300 hover:scale-110'
+                >
+                  My items for sale
                 </Link>
               </div>
           </div>

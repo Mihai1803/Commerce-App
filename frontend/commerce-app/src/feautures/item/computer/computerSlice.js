@@ -90,7 +90,6 @@ export const computerSlice = createSlice({
         state.message = action.payload
         state.singleComputer = null
       })
-  
   }
 })
 

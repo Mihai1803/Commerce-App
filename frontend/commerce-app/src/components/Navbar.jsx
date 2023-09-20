@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from  'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faMagnifyingGlass, faUser} from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons'
 import { logout } from '../feautures/auth/authSlice'
 
 function Navbar() {

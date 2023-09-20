@@ -91,9 +91,17 @@ const getUserItems = asyncHandler( async (req, res) => {
   }
 
   // find items
-  const items = await Item.find({ user: req.user._id })
-  if (items) {
-    res.status(200).json(items)
+  const phones = await Phone.find({ user: req.user._id })
+  const computers = await Computer.find({ user: req.user._id })
+  const laptops = await Laptop.find({ user: req.user._id })
+  const watches = await Watch.find({ user: req.user._id })
+  if (phones || computers || laptops || watches) {
+    res.status(200).json({
+      phones: phones,
+      computers: computers,
+      laptops: laptops,
+      watches: watches
+    })
   } else {
     res.status(400).json({ message: 'No items found' })
   }
@@ -128,12 +136,30 @@ const getItemById = asyncHandler( async(req, res) => {
 const deleteItem = asyncHandler( async (req, res) => {
 
   try {
-    const item = await Item.findOne({ _id: req.params.itemId })
-    if (item.user.equals(req.user._id)) {
-      await Item.deleteOne({_id: req.params.itemId })
+    const phone = await Phone.findOne({ _id: req.params.itemId })
+    const computer = await Computer.findOne({ _id: req.params.itemId })
+    const laptop = await Laptop.findOne({ _id: req.params.itemId })
+    const watch = await Watch.findOne({ _id: req.params.itemId })
+    // if (phone.user.equals(req.user._id)) {
+    //   await Item.deleteOne({_id: req.params.itemId })
+    //   res.status(200).json({ message: 'Item deleted'})
+    // } else {
+    //   res.status(400).json({ message: 'Not Authorized' });
+    // }
+    if (phone && phone.user.equals(req.user._id)) {
+      await Phone.deleteOne({ _id: req.params.itemId })
+      res.status(200).json({ message: 'Item deleted'})
+    } else if (computer && computer.user.equals(req.user._id) ) {
+      await Computer.deleteOne({ _id: req.params.itemId })
+      res.status(200).json({ message: 'Item deleted'})
+    } else if (laptop && laptop.user.equals(req.user._id)) {
+      await Laptop.deleteOne({ _id: req.params.itemId })
+      res.status(200).json({ message: 'Item deleted'})
+    } else if (watch && watch.user.equals(req.user._id)) {
+      await Watch.deleteOne({ _id: req.params.itemId })
       res.status(200).json({ message: 'Item deleted'})
     } else {
-      res.status(400).json({ message: 'Not Authorized' });
+      res.status(200).json({message: 'Could not delete item'})
     }
   } catch (error) {
     res.status(400).json({ message: 'Could not delete item' })
